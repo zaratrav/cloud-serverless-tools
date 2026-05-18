@@ -1,0 +1,593 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #0f766e;
+    --primary-light: #14b8a6;
+    --danger: #dc2626;
+    --success: #16a34a;
+    --warning: #f59e0b;
+    --bg: #f0fdfa;
+    --card-bg: #fff;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --border: #e5e7eb;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+html, body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* Main */
+main {
+    padding: 40px 0;
+}
+
+section {
+    margin-bottom: 60px;
+}
+
+section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: var(--text);
+    border-bottom: 3px solid var(--primary);
+    padding-bottom: 12px;
+    display: inline-block;
+}
+
+section h3 {
+    font-size: 1.4rem;
+    margin-top: 28px;
+    margin-bottom: 16px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+section h4 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: var(--text);
+    font-weight: 600;
+}
+
+section p {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    line-height: 1.8;
+}
+
+/* Intro */
+.intro {
+    margin-bottom: 40px;
+}
+
+/* Featured Tool */
+.featured-tool {
+    background: var(--card-bg);
+    padding: 40px 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 40px;
+    border-top: 4px solid var(--primary);
+}
+
+.featured-tool h2 {
+    margin-bottom: 12px;
+}
+
+.featured-tool > .container > p {
+    margin-bottom: 24px;
+    color: var(--text-light);
+}
+
+/* Comparator */
+.cloud-comparator {
+    margin-top: 20px;
+}
+
+.control-section {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.control-section h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+.service-selector select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.provider-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+}
+
+.checkbox-label:hover {
+    border-color: var(--primary);
+    background: #f0fdfa;
+}
+
+.checkbox-label input {
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+/* Comparison Results */
+.comparison-results {
+    background: #f0fdfa;
+    padding: 24px;
+    border-radius: 8px;
+    border: 2px solid var(--primary);
+}
+
+.comparison-results h3 {
+    margin-top: 0;
+}
+
+/* Table */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.sla-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.sla-table thead {
+    background: linear-gradient(135deg, #0f766e, #14b8a6);
+    color: white;
+}
+
+.sla-table th {
+    padding: 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.sla-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.sla-table tbody tr:hover {
+    background: #f0fdfa;
+}
+
+.sla-table td:first-child {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Downtime Charts */
+.downtime-visual {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    margin: 20px 0;
+}
+
+.downtime-visual h4 {
+    margin-top: 0;
+}
+
+#downtimeCharts {
+    display: grid;
+    gap: 16px;
+}
+
+.downtime-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.downtime-bar-label {
+    min-width: 120px;
+    font-weight: 600;
+}
+
+.downtime-bar-value {
+    flex: 1;
+    height: 30px;
+    background: linear-gradient(90deg, #0f766e, #14b8a6);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Calculator Section */
+.calculator-section {
+    background: var(--card-bg);
+    padding: 40px 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    border-top: 4px solid var(--primary);
+}
+
+.calculator-section h2 {
+    margin-bottom: 12px;
+}
+
+.calculator-section > .container > p {
+    margin-bottom: 24px;
+    color: var(--text-light);
+}
+
+/* Uptime Calc */
+.uptime-calc {
+    margin-top: 20px;
+}
+
+.calc-inputs {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.uptime-slider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.uptime-slider input {
+    flex: 1;
+    cursor: pointer;
+}
+
+#uptimeValue {
+    min-width: 100px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.preset-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.preset-btn {
+    padding: 10px 14px;
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.preset-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Calc Results */
+.calc-results {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.result-card {
+    background: #f0fdfa;
+    padding: 16px;
+    border-radius: 6px;
+    text-align: center;
+    border: 1px solid var(--border);
+}
+
+.result-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.result-value {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.sla-context {
+    background: #f9fafb;
+    padding: 16px;
+    border-radius: 6px;
+    border-left: 4px solid var(--primary);
+}
+
+.sla-context h4 {
+    margin-top: 0;
+}
+
+/* Guide */
+.guide {
+    background: var(--card-bg);
+    padding: 40px 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+/* SLA Comparison Grid */
+.sla-comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.sla-card {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.sla-card.highlight {
+    background: linear-gradient(135deg, #f0fdfa, #e0f2fe);
+    border: 2px solid var(--primary);
+}
+
+.sla-card h4 {
+    margin-top: 0;
+    color: var(--primary);
+}
+
+.sla-card p {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.sla-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* Provider SLA Grid */
+.provider-sla-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.provider-card {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+}
+
+.provider-card h4 {
+    margin-top: 0;
+}
+
+.provider-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.provider-card li {
+    padding: 6px 0;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Use Case Grid */
+.use-case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.use-case-card {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.use-case-card h4 {
+    margin-top: 0;
+    color: var(--primary);
+}
+
+.use-case-card p {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+/* Mistakes Grid */
+.mistakes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.mistake-card {
+    background: #fef2f2;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--danger);
+}
+
+.mistake-card h4 {
+    margin-top: 0;
+    color: var(--danger);
+}
+
+.mistake-card p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+/* FAQs */
+.faqs {
+    background: var(--card-bg);
+    padding: 40px 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.faqs h2 {
+    margin-bottom: 30px;
+}
+
+.faq-item {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.faq-item h3 {
+    font-size: 1.05rem;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.faq-item p {
+    margin-bottom: 0;
+}
+
+/* Footer */
+.footer {
+    background: var(--text);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+}
+
+.footer p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    section h2 {
+        font-size: 1.6rem;
+    }
+
+    .provider-selector,
+    .sla-comparison-grid,
+    .provider-sla-grid,
+    .use-case-grid,
+    .mistakes-grid,
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sla-table {
+        font-size: 0.85rem;
+    }
+
+    .sla-table th,
+    .sla-table td {
+        padding: 8px;
+    }
+}
