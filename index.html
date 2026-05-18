@@ -1,70 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Cloud & Serverless Tools | AWS Lambda, Uptime & Cloud Comparison</title>
-<meta name="description" content="Explore cloud and serverless tools including AWS Lambda pricing, uptime calculators, SLA estimators and cloud provider comparisons.">
-<meta name="keywords" content="aws lambda pricing calculator, serverless vs containers, aws gcp azure comparison, cdn provider comparison, uptime calculator, sla uptime percentage">
-<meta name="google-site-verification" content="uQVQvib9O00oQFIT-tXdnkU3Vh5VSFZw2b3WhCHTCns
-" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="PkLa_ViOo6FAHpvh8SacceMb95o9tePRdrqLNBz9X1M" />
+    <title>Cloud Provider SLA & Uptime Comparison: AWS vs Azure vs GCP Reliability</title>
+    <meta name="description" content="Compare cloud provider uptime and SLA guarantees. Calculate downtime impact for AWS, Azure, GCP, DigitalOcean, and other providers. Understand 99.9% vs 99.99% SLA differences.">
+    <meta name="keywords" content="cloud provider comparison, sla uptime percentage, aws azure gcp comparison, uptime calculator, cloud provider reliability, sla comparison, 99.9 vs 99.99, cloud downtime calculator, cloud provider sla, service level agreement">
+    <link rel="stylesheet" href="cloud-sla-style.css">
 </head>
-
 <body>
+    <header class="header">
+        <div class="container">
+            <h1>Cloud Provider SLA & Uptime Comparison</h1>
+            <p class="subtitle">Compare uptime guarantees, SLA percentages, and expected downtime across AWS, Azure, GCP, and other cloud providers</p>
+        </div>
+    </header>
 
-<h1>Cloud & Serverless Tools</h1>
+    <main>
+        <section class="intro">
+            <div class="container">
+                <h2>Choose Cloud Providers Based on Reliability & Uptime Guarantees</h2>
+                <p>
+                    Cloud provider reliability matters. A difference between 99.9% and 99.99% uptime SLA translates to 8.76 hours vs 52 minutes 
+                    of downtime per year—critical for mission-critical applications. This comparator helps you understand SLA guarantees, 
+                    calculate expected downtime, and compare reliability across AWS, Azure, GCP, DigitalOcean, Linode, and other providers.
+                </p>
+            </div>
+        </section>
 
-<h2>Available Tools</h2>
-<ul>
-<li><a href="#">AWS Lambda Pricing Calculator</a></li>
-<li><a href="#">Serverless vs Containers</a></li>
-<li><a href="#">Cloud Provider Comparison (AWS vs GCP vs Azure)</a></li>
-<li><a href="#">CDN Provider Comparison</a></li>
-<li><a href="#">Uptime Calculator</a></li>
-<li><a href="#">SLA Uptime Percentage Calculator</a></li>
-<li><a href="#">99.9% Uptime Calculator</a></li>
-</ul>
+        <!-- MAIN COMPARATOR TOOL -->
+        <section class="featured-tool">
+            <div class="container">
+                <h2>Cloud Provider Uptime & SLA Comparison Tool</h2>
+                <p>Select cloud providers and service types to compare SLAs side-by-side and calculate expected downtime.</p>
 
-<h2>About Cloud & Serverless</h2>
-<p>
-Cloud computing and serverless architectures enable scalable, cost-efficient applications
-without managing infrastructure directly.
-</p>
+                <div class="comparator cloud-comparator">
+                    <div class="control-section">
+                        <h3>Step 1: Select Service Type</h3>
+                        <div class="service-selector">
+                            <select id="serviceType" onchange="updateProviders()">
+                                <option value="compute">Compute (Virtual Machines / Instances)</option>
+                                <option value="database">Database (SQL / NoSQL)</option>
+                                <option value="storage">Storage (Object / File Storage)</option>
+                                <option value="cdn">CDN (Content Delivery Network)</option>
+                                <option value="loadbalancer">Load Balancer</option>
+                                <option value="multiaz">Multi-AZ Deployments</option>
+                            </select>
+                        </div>
 
-<p>
-Services like AWS Lambda allow event-driven execution,
-while comparisons between cloud providers help developers choose the best platform.
-</p>
+                        <h3>Step 2: Select Providers to Compare</h3>
+                        <div class="provider-selector">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="aws" onchange="updateComparison()" checked> AWS
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="azure" onchange="updateComparison()" checked> Azure
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="gcp" onchange="updateComparison()" checked> Google Cloud
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="digitalocean" onchange="updateComparison()"> DigitalOcean
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="linode" onchange="updateComparison()"> Linode (Akamai)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="vultr" onchange="updateComparison()"> Vultr
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="heroku" onchange="updateComparison()"> Heroku
+                            </label>
+                        </div>
+                    </div>
 
-<p>
-Uptime and SLA calculations are critical for understanding availability guarantees
-and ensuring reliable systems in production.
-</p>
+                    <!-- COMPARISON TABLE -->
+                    <div class="comparison-results" id="comparisonResults" style="display: none;">
+                        <h3>SLA & Uptime Comparison</h3>
+                        
+                        <div class="table-wrapper">
+                            <table class="sla-table" id="slaTable">
+                                <thead>
+                                    <tr>
+                                        <th>Provider</th>
+                                        <th>SLA Guarantee</th>
+                                        <th>Downtime / Year</th>
+                                        <th>Downtime / Month</th>
+                                        <th>Downtime / Day</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="slaTableBody">
+                                </tbody>
+                            </table>
+                        </div>
 
-<h2>Related Searches</h2>
-<ul>
-<li>aws lambda pricing example</li>
-<li>serverless vs containers pros and cons</li>
-<li>aws vs gcp vs azure comparison</li>
-<li>cdn providers comparison performance</li>
-<li>uptime percentage calculation</li>
-<li>99.9 uptime downtime per year</li>
-</ul>
+                        <div class="downtime-visual">
+                            <h4>Visual: Expected Annual Downtime</h4>
+                            <div id="downtimeCharts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<h2>More Keywords</h2>
-<p>
-cloud tools, serverless tools, devops cloud tools,
-backend infrastructure tools, cloud optimization,
-modern cloud architecture
-</p>
+        <!-- DOWNTIME CALCULATOR -->
+        <section class="calculator-section">
+            <div class="container">
+                <h2>SLA Uptime Percentage Calculator</h2>
+                <p>Calculate expected downtime for any SLA percentage. Understand the impact of 99.9% vs 99.99% vs 99.999% uptime guarantees.</p>
 
-<footer>
-<p>
-aws lambda uptime sla cloud comparison,
-serverless vs containers cdn tools,
-cloud provider optimization tools,
-modern dev tools cloud
-</p>
-</footer>
+                <div class="calculator uptime-calc">
+                    <div class="calc-inputs">
+                        <div class="input-group">
+                            <label>SLA Uptime Percentage (%)</label>
+                            <div class="uptime-slider">
+                                <input type="range" id="uptimePercentage" min="99" max="99.999" step="0.001" value="99.9" onchange="calculateDowntime()">
+                                <span id="uptimeValue">99.9%</span>
+                            </div>
+                        </div>
 
+                        <div class="preset-buttons">
+                            <button class="preset-btn" onclick="setUptime(99.0)">99.0%</button>
+                            <button class="preset-btn" onclick="setUptime(99.9)">99.9%</button>
+                            <button class="preset-btn" onclick="setUptime(99.95)">99.95%</button>
+                            <button class="preset-btn" onclick="setUptime(99.99)">99.99%</button>
+                            <button class="preset-btn" onclick="setUptime(99.999)">99.999%</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-results" id="downtimeResults">
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <span class="result-label">Annual Downtime</span>
+                                <span class="result-value" id="annualDowntime">0h 0m</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-label">Monthly Downtime</span>
+                                <span class="result-value" id="monthlyDowntime">0h 0m</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-label">Daily Downtime</span>
+                                <span class="result-value" id="dailyDowntime">0m 0s</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-label">Hourly Downtime</span>
+                                <span class="result-value" id="hourlyDowntime">0s</span>
+                            </div>
+                        </div>
+
+                        <div class="sla-context">
+                            <h4>What This Means</h4>
+                            <p id="contextText"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATIONAL GUIDE -->
+        <section class="guide">
+            <div class="container">
+                <h2>Understanding Cloud Provider SLA & Uptime Guarantees</h2>
+
+                <h3>What is SLA (Service Level Agreement)?</h3>
+                <p>
+                    An SLA is a contract between the cloud provider and customer that guarantees a minimum uptime percentage. 
+                    For example, AWS EC2 SLA guarantees 99.99% uptime. If they fall short, customers get service credits (typically 10-100% refund). 
+                    SLA is critical for choosing reliable infrastructure.
+                </p>
+
+                <h3>The Difference: 99.9% vs 99.95% vs 99.99% vs 99.999%</h3>
+                <div class="sla-comparison-grid">
+                    <div class="sla-card">
+                        <h4>99.0% SLA</h4>
+                        <p><strong>Annual Downtime:</strong> 87.6 hours (3.65 days)</p>
+                        <p><strong>Use Case:</strong> Non-critical, development/staging</p>
+                        <p><strong>Impact:</strong> High risk for production</p>
+                    </div>
+                    <div class="sla-card highlight">
+                        <h4>99.9% SLA</h4>
+                        <p><strong>Annual Downtime:</strong> 8.76 hours (21.6 min/month)</p>
+                        <p><strong>Use Case:</strong> Standard production workloads</p>
+                        <p><strong>Impact:</strong> Most websites & APIs</p>
+                    </div>
+                    <div class="sla-card highlight">
+                        <h4>99.95% SLA</h4>
+                        <p><strong>Annual Downtime:</strong> 4.38 hours (10.8 min/month)</p>
+                        <p><strong>Use Case:</strong> High-availability production</p>
+                        <p><strong>Impact:</strong> Critical but not mission-critical</p>
+                    </div>
+                    <div class="sla-card">
+                        <h4>99.99% SLA</h4>
+                        <p><strong>Annual Downtime:</strong> 52.6 minutes (4.38 min/month)</p>
+                        <p><strong>Use Case:</strong> Mission-critical applications</p>
+                        <p><strong>Impact:</strong> Financial services, healthcare, SaaS</p>
+                    </div>
+                    <div class="sla-card">
+                        <h4>99.999% SLA</h4>
+                        <p><strong>Annual Downtime:</strong> 5.26 minutes (26 sec/month)</p>
+                        <p><strong>Use Case:</strong> Ultra-critical systems</p>
+                        <p><strong>Impact:</strong> Requires multi-region redundancy</p>
+                    </div>
+                </div>
+
+                <h3>Cloud Provider SLA Comparison by Service</h3>
+                <div class="provider-sla-grid">
+                    <div class="provider-card">
+                        <h4>AWS (Amazon Web Services)</h4>
+                        <ul>
+                            <li><strong>EC2:</strong> 99.99% (single AZ: 99.95%)</li>
+                            <li><strong>RDS:</strong> 99.95% (Multi-AZ: 99.99%)</li>
+                            <li><strong>S3:</strong> 99.99%</li>
+                            <li><strong>CloudFront:</strong> 99.99%</li>
+                            <li><strong>ELB:</strong> 99.99%</li>
+                        </ul>
+                    </div>
+                    <div class="provider-card">
+                        <h4>Microsoft Azure</h4>
+                        <ul>
+                            <li><strong>VMs:</strong> 99.99% (single instance: 99.9%)</li>
+                            <li><strong>SQL Database:</strong> 99.99%</li>
+                            <li><strong>Blob Storage:</strong> 99.99%</li>
+                            <li><strong>Azure CDN:</strong> 99.99%</li>
+                            <li><strong>App Service:</strong> 99.95%</li>
+                        </ul>
+                    </div>
+                    <div class="provider-card">
+                        <h4>Google Cloud Platform</h4>
+                        <ul>
+                            <li><strong>Compute Engine:</strong> 99.99%</li>
+                            <li><strong>Cloud SQL:</strong> 99.95%</li>
+                            <li><strong>Cloud Storage:</strong> 99.99%</li>
+                            <li><strong>Cloud CDN:</strong> 99.99%</li>
+                            <li><strong>Cloud Load Balancing:</strong> 99.99%</li>
+                        </ul>
+                    </div>
+                    <div class="provider-card">
+                        <h4>DigitalOcean</h4>
+                        <ul>
+                            <li><strong>Droplets:</strong> 99.99%</li>
+                            <li><strong>Managed Databases:</strong> 99.95%</li>
+                            <li><strong>Spaces (Storage):</strong> 99.99%</li>
+                            <li><strong>Load Balancers:</strong> 99.99%</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>How to Choose Based on Uptime Requirements</h3>
+                <div class="use-case-grid">
+                    <div class="use-case-card">
+                        <h4>99.9% SLA (8.76 hours/year downtime)</h4>
+                        <p><strong>Good for:</strong> Websites, blogs, standard APIs</p>
+                        <p><strong>Single provider OK if:</strong> You can tolerate ~21 min downtime/month</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4>99.95% SLA (4.38 hours/year downtime)</h4>
+                        <p><strong>Good for:</strong> E-commerce, SaaS platforms, business-critical apps</p>
+                        <p><strong>Strategy:</strong> Single provider with good redundancy within region</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4>99.99% SLA (52.6 min/year downtime)</h4>
+                        <p><strong>Good for:</strong> Financial systems, payment processing, healthcare</p>
+                        <p><strong>Strategy:</strong> Multi-AZ (availability zone) within region + backups</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4>99.999% SLA (5.26 min/year downtime)</h4>
+                        <p><strong>Good for:</strong> Mission-critical systems, life-safety systems</p>
+                        <p><strong>Strategy:</strong> Multi-region active-active + disaster recovery</p>
+                    </div>
+                </div>
+
+                <h3>SLA Exclusions & Fine Print</h3>
+                <ul style="list-style-position: inside; color: var(--text-light); line-height: 1.8;">
+                    <li><strong>Downtime doesn't include:</strong> Customer-caused issues (misconfiguration, DDoS attacks, code bugs)</li>
+                    <li><strong>SLA credits:</strong> Typically 10% refund for 99-99.9%, 30% for 99.9-99.95%, 100% for below 99%</li>
+                    <li><strong>Manual intervention:</strong> Required to claim credits (no automatic refunds)</li>
+                    <li><strong>Single region vs Multi-AZ:</strong> Single AZ has lower SLA than multi-AZ deployments</li>
+                    <li><strong>Network outages:</strong> Provider SLA doesn't cover your ISP downtime</li>
+                </ul>
+
+                <h3>Common SLA Mistakes</h3>
+                <div class="mistakes-grid">
+                    <div class="mistake-card">
+                        <h4>❌ Confusing SLA with Actual Uptime</h4>
+                        <p>SLA is a guarantee. AWS might have 99.9% uptime, but actual uptime could be 99.99%. SLA is minimum, not maximum.</p>
+                    </div>
+                    <div class="mistake-card">
+                        <h4>❌ Not Understanding Multi-AZ Impact</h4>
+                        <p>Single-AZ EC2: 99.95% SLA. Multi-AZ: 99.99%. Huge difference. Always use multi-AZ for production.</p>
+                    </div>
+                    <div class="mistake-card">
+                        <h4>❌ Ignoring Network Dependencies</h4>
+                        <p>Cloud provider SLA ≠ total uptime. Your ISP downtime, DNS failures, and DDoS attacks aren't covered.</p>
+                    </div>
+                    <div class="mistake-card">
+                        <h4>❌ Relying on Single Region</h4>
+                        <p>For 99.99%+: you need multi-region failover. Single region can't guarantee 99.999% even with multi-AZ.</p>
+                    </div>
+                    <div class="mistake-card">
+                        <h4>❌ Not Claiming SLA Credits</h4>
+                        <p>AWS/Azure won't auto-refund. You must manually claim credits within 30 days. Most companies miss this.</p>
+                    </div>
+                    <div class="mistake-card">
+                        <h4>❌ Assuming All Services Have Same SLA</h4>
+                        <p>AWS EC2 might be 99.99%, but RDS single-AZ is 99.95%. Check each service individually.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQS -->
+        <section class="faqs">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>What's the difference between 99.9% and 99.99% uptime?</h3>
+                    <p>
+                        99.9% = 8.76 hours/year downtime. 99.99% = 52.6 minutes/year downtime. That's 166x difference in expected downtime. 
+                        For mission-critical systems, the difference is massive.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Do cloud provider SLAs include my code/misconfiguration?</h3>
+                    <p>
+                        No. SLA covers infrastructure outages only. If your code crashes, your database is misconfigured, or you run out of resources, 
+                        that's not covered. SLA is provider infrastructure uptime only.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How do I achieve 99.99% uptime on AWS?</h3>
+                    <p>
+                        Use Multi-AZ deployments (RDS Multi-AZ, EC2 in multiple AZs behind a load balancer). Single-AZ is 99.95%. 
+                        Multi-AZ = 99.99%. For higher: add multi-region failover + Route 53 health checks.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Does Azure or GCP have better uptime than AWS?</h3>
+                    <p>
+                        At the SLA level: similar. AWS, Azure, GCP all offer 99.99% for compute. Real-world uptime varies by region/service. 
+                        AWS has mature infrastructure; Azure integrates with Windows/Office; GCP excels at data analytics. 
+                        Choose based on features, not SLA alone.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How do I claim SLA credits from AWS/Azure?</h3>
+                    <p>
+                        Manually. AWS: submit a case within 30 days of outage. Azure: same process. There's no auto-refund. 
+                        Required: documentation of impact, proof of outage, and specific time windows affected.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What if I need higher than 99.999% uptime?</h3>
+                    <p>
+                        99.999% = 5 nines = 5.26 min/year downtime. This requires: multi-region active-active, automated failover, 
+                        disaster recovery plans, and chaos engineering. Most companies don't need this (even financial services use 99.99%).
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Does ISP downtime count against cloud provider SLA?</h3>
+                    <p>
+                        No. Cloud provider SLA covers only their infrastructure. If your ISP is down, you can't reach the cloud, 
+                        but that's not the provider's fault. Use multi-ISP connectivity or hybrid cloud for mission-critical scenarios.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Should I always choose the provider with highest SLA?</h3>
+                    <p>
+                        No. Choose based on total cost of ownership, features, and ecosystem fit. AWS 99.99% vs DigitalOcean 99.99% 
+                        are equivalent. Your application needs (managed databases, auto-scaling, etc.) matter more than SLA percentages at the top tier.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Cloud Provider SLA Comparator. Make informed decisions on cloud reliability and uptime guarantees.</p>
+        </div>
+    </footer>
+
+    <script src="cloud-sla-script.js"></script>
 </body>
 </html>
